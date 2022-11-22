@@ -1,4 +1,4 @@
-const images = [ { image: 'img/01.webp',
+const imgList = [ { image: 'img/01.webp',
  title: 'Marvel\'s Spiderman Miles Morale',
   text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
  },
@@ -16,14 +16,31 @@ const images = [ { image: 'img/01.webp',
     text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.', } ];
 
  let container = document.getElementById("items-container");
- let img = document.createElement("img");
+ 
  
 
-   images.forEach(element =>img.innerHTML = document.getElementsByClassName("img").src = element.image)
-    
+ imgList.forEach((element)=>{
+    let cont = document.getElementById("items-container");
+    let div = document.createElement("div");
+    let img = document.createElement("img");
+
+
+  
+    div.classList.add("img");
+
+    img.src = (element.image);
+
+
+ })
+
+ 
+   
    
     
+   
+   
     
+  
    
    
   
