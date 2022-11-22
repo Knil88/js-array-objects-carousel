@@ -3,6 +3,21 @@
     margin: 0;
     box-sizing: border-box;
 }
+h2,p{
+    position: absolute;
+    font-family: sans-serif;
+    background-color: blue;
+   color: chocolate;
+}
+h2{
+   
+    bottom: 15%;
+   
+}
+p {
+    bottom: 10%;
+    font-size: 15px;
+  }
 img{
     
     overflow: scroll;
@@ -31,6 +46,7 @@ img{
     position: relative;
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 #up{
     position: absolute;

@@ -86,7 +86,7 @@ btnDown.addEventListener("click",
 
         }
         else if(activeItem < 0){
-            btnDown.classList.add("item");
+            
             btnUp.classList.add("active");
             
             
