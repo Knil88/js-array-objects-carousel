@@ -29,6 +29,13 @@ const imgList = [ { image: 'img/01.webp',
     div.style.height = '500px';
     let img = document.createElement("img");
     div.classList.add("item");
+    let miniCont = document.getElementById("mini-container");
+    let miniDiv = document.createElement("div");
+    miniDiv.style.width = "150px";
+    miniDiv.style.height = "100px";
+    let miniImg = document.createElement("img");
+    miniCont.append(miniDiv);
+    miniDiv.append(miniImg);
     
     div.append(img,title,subtitle);
     cont.append(div);
@@ -40,24 +47,41 @@ const imgList = [ { image: 'img/01.webp',
     title.innerHTML = (element.title);
     subtitle.innerHTML = (element.text);
     img.src = (element.image);
+    miniImg.src =(element.image);
     
 
 
  })
  const divArray = document.getElementsByClassName("img");
  divArray[0].classList.add("active");
+ 
  let activeItem = 0 ; 
+ const miniDivArray = document.getElementsByClassName("");
+ 
  btnDown.addEventListener("click",
     function(){
 
         //Poniamo la condizione che se la constante activeItem è minore della lunghezza della lista divArray
 
-        if(activeItem  < divArray.length - 1) {
+        
+        if(activeItem === divArray.length - 1){
+            divArray[activeItem].classList.remove("active");
+            divArray[activeItem].classList.remove("animation");
+          
+            activeItem = 0 ; 
+
+            divArray[activeItem].classList.add("active");
+            divArray[activeItem].classList.add("animation");
+            
+        }
+       
+        else {
 
             //ogni volta che clicchiamo al div precendente viene tolta la classe active
-
+           
 
             divArray[activeItem].classList.remove("active");
+            divArray[activeItem].classList.remove("animation");
 
             //Di conseguenza il numero dell'elemento in lista aumenta passando da 0 ad 1 e cosi via .
 
@@ -66,16 +90,8 @@ const imgList = [ { image: 'img/01.webp',
             //Cosi il div successivo gli viene aggiunta la classe active in modo che l'immagine possa apparire
 
             divArray[activeItem].classList.add("active");
-
+            divArray[activeItem].classList.add("animation");
         }
-        else if(activeItem < 0){
-            btnDown.classList.add("item");
-            btnUp.classList.add("active");
-            
-            
-            
-        }
-        
         
     }
 )
@@ -83,22 +99,22 @@ const imgList = [ { image: 'img/01.webp',
 
 btnUp.addEventListener("click",
     function(){
-        if(activeItem > 0) {
+      if(activeItem === 0){
+        divArray[activeItem].classList.remove("active");
+        divArray[activeItem].classList.remove("animation");
+        activeItem = divArray.length - 1;
+        divArray[activeItem].classList.add("active");
+        divArray[activeItem].classList.add("animation");
+      }
+        
+        else{
             divArray[activeItem].classList.remove("active");
+            divArray[activeItem].classList.remove("animation");
             activeItem--;
+
             divArray[activeItem].classList.add("active");
-            
-
+            divArray[activeItem].classList.add("animation");
         }
-        else if(activeItem == divArray.length + 1 ){
-            btnUp.classList.add("item");
-            btnDown.classList.add("active");
-            
-
-            
-        }
-        
-        
     }
 )
 

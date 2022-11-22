@@ -53,11 +53,11 @@ for(let i=0 ; i < imgList.length; i++){
 
 
 const divArray = document.getElementsByClassName("img");
-
+const miniDivArray = document.getElementsByClassName("img");
 //Settiamo la costante in modo che il primo elemento presente nell'array abbia calsse active che corrisponde a display block
 
 divArray[0].classList.add("active");
-
+miniDivArray[0].classList.add("select");
 //Creiamo la variante activeItem e gli diciamo che ha valore 0
 
 let activeItem = 0 ; 
@@ -75,7 +75,7 @@ btnDown.addEventListener("click",
 
 
             divArray[activeItem].classList.remove("active");
-
+            
             //Di conseguenza il numero dell'elemento in lista aumenta passando da 0 ad 1 e cosi via .
 
             activeItem++;
