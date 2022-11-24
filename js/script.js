@@ -1,120 +1,152 @@
-// creiamo la lista in cui immetteremo le nostre immagini
-let imgList = new Array();
-const btnUp = document.querySelector("#up");
-const btnDown = document.querySelector("#down");
+//Creiamo un array di oggetti
+const imgList = [ { image: 'img/01.webp',
+ title: 'Marvel\'s Spiderman Miles Morale',
+  text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
+ },
+  { image: 'img/02.webp', 
+  title: 'Ratchet & Clank: Rift Apart', 
+  text: 'Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality.',
+ },
+  { image: 'img/03.webp',
+  title: 'Fortnite', text: "Grab all of your friends and drop into Epic Games Fortnite, a massive 100 - player face - off that combines looting, crafting, shootouts and chaos.",
+ },
+  { image: 'img/04.webp', title: 'Stray', text: 'Lost, injured and alone, a stray cat must untangle an ancient mystery to escape a long-forgotten city',
+ },
+  { image: 'img/05.webp',
+   title: "Marvel's Avengers",
+    text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.', } ];
+//creaimo i collegamenti per i bottoni
+   
+ 
+    const btnUp = document.querySelector("#up");
+    const btnDown = document.querySelector("#down");
+    var  idInterval;
+//con un ciclo for each ci estrapoliamo i dati
 
-imgList[0] = new Image();
-imgList[0].src = 'img/01.webp';
-
-imgList[1] = new Image();
-imgList[1].src = 'img/02.webp';
-
-imgList[2] = new Image();
-imgList[2].src = 'img/03.webp';
-
-imgList[3] = new Image();
-imgList[3].src = 'img/04.webp';
-
-imgList[4] = new Image();
-imgList[4].src = 'img/05.webp';
-
-
-
-//Creiamo il ciclo 
-
-for(let i=0 ; i < imgList.length; i++){
+ imgList.forEach((element)=>{
+    //creiamo i collegamenti per ogni variabile necessaria
     
     let cont = document.getElementById("items-container");
+    let miniCont = document.getElementById("mini-container");
+
+//Creiamo gli elementi necessari in cui appenderemo i nostri elementi
+
     let div = document.createElement("div");
-    
-    //Settiamo le dimensioni delle immagini
+    let title = document.createElement("h2");
+    let subtitle = document.createElement("p");
+    let img = document.createElement("img");
+    let miniDiv = document.createElement("div");
+    let miniImg = document.createElement("img");
+
+    //Impostiamo una width ed una height
 
     div.style.width = '1000px';
     div.style.height = '500px';
 
-    //Appendiamo dentro il div la lista immagini
+    miniDiv.style.width = "150px";
+    miniDiv.style.height = "100px";
 
-    div.append(imgList[i]);
-
-    //Appendiamo dentro il item-container(ovvero la variabile cont) il div
-
-    cont.append(div);
-
-    //Aggiungiamo la classe img ed item che darà diplay none ai contenitori
-    div.classList.add("img");
+    //Aggiungiamo la classe item  e img al div che inizialmente risuterà invisibile perchè in display none a causa di item
     div.classList.add("item");
+    div.classList.add("img");
+   
+    //inseriamo in innerHTML i dati etrapolati nella lista oggetti
 
-   console.log(imgList[i]);
+    title.innerHTML = (element.title);
+    subtitle.innerHTML = (element.text);
 
-}
+    //con .src possiamo inserire nel DOM tramite il suo path l'immagine
 
+    img.src = (element.image);
+    miniImg.src =(element.image);
+   
+    //Utilizziamo append per inserire i nostri elementi nel dom
+    miniCont.append(miniDiv);
+    miniDiv.append(miniImg);
+    div.append(img,title,subtitle);
+    cont.append(div);
+ })
 
-//Creiamo la costante divArray prendendo agganciandola ad img
+//andiamo a dichiarare la variabile divArray dentro img
 
+ const divArray = document.getElementsByClassName("img");
 
-const divArray = document.getElementsByClassName("img");
-const miniDivArray = document.getElementsByClassName("img");
-//Settiamo la costante in modo che il primo elemento presente nell'array abbia calsse active che corrisponde a display block
+//Grazie a questo classList.add possiamo fare si che il primo elemento divArray diventi visibile
 
-divArray[0].classList.add("active");
-miniDivArray[0].classList.add("select");
-//Creiamo la variante activeItem e gli diciamo che ha valore 0
-
-let activeItem = 0 ; 
-
-// Creiamo evento bottone  btnDown
-
-btnDown.addEventListener("click",
+ divArray[0].classList.add("active");
+ 
+ let activeItem = 0 ; 
+ 
+ //Andiamo a creare l'evento click che ci permetterà di cambiare le nostre immagini
+ 
+ btnDown.addEventListener("click",
     function(){
 
+       idInterval = setInterval(() => {
+            if(activeItem === divArray.length - 1){
+            
+                divArray[activeItem].classList.remove("active");
+                
+                divArray[activeItem].classList.remove("animation");
+              
+                activeItem = 0 ; 
+    
+                
+                divArray[activeItem].classList.add("active");
+                
+                divArray[activeItem].classList.add("animation");
+                
+            }
+            else {
+
+                //ogni volta che clicchiamo al div precendente viene tolta la classe active
+               
+    
+                divArray[activeItem].classList.remove("active");
+                
+                divArray[activeItem].classList.remove("animation");
+    
+                //Di conseguenza il numero dell'elemento in lista aumenta passando da 0 ad 1 e cosi via .
+    
+                activeItem++;
+    
+                //Cosi il div successivo gli viene aggiunta la classe active in modo che l'immagine possa apparire
+    
+                divArray[activeItem].classList.add("active");
+                
+                divArray[activeItem].classList.add("animation");
+            }
+            
+        }, 3000);
         //Poniamo la condizione che se la constante activeItem è minore della lunghezza della lista divArray
-
-        if(activeItem  < divArray.length - 1) {
-
-            //ogni volta che clicchiamo al div precendente viene tolta la classe active
-
-
-            divArray[activeItem].classList.remove("active");
-            
-            //Di conseguenza il numero dell'elemento in lista aumenta passando da 0 ad 1 e cosi via .
-
-            activeItem++;
-
-            //Cosi il div successivo gli viene aggiunta la classe active in modo che l'immagine possa apparire
-
-            divArray[activeItem].classList.add("active");
-
-        }
-        else if(activeItem < 0){
-            
-            btnUp.classList.add("active");
-            
-            
-            
-        }
+        //questo evento permette di scorrere in avanti
         
+    
+       
+       
         
     }
 )
 
-
+//Questo evento permette di andare indietro con le immagini
 btnUp.addEventListener("click",
     function(){
-        if(activeItem > 0) {
-            divArray[activeItem].classList.remove("active");
-            activeItem--;
-            divArray[activeItem].classList.add("active");
-            
-
-        }
-        else if(activeItem == divArray.length + 1 ){
-            btnUp.classList.add("item");
-            btnDown.classList.add("active");
-            
-
-            
-        }
+        clearInterval(idInterval);}
         
-        
-    }
 )
+
+
+ 
+   
+   
+    
+   
+   
+    
+  
+   
+   
+  
+  
+  
+
